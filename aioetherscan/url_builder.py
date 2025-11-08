@@ -4,16 +4,16 @@ from urllib.parse import urlunsplit, urljoin
 
 class UrlBuilder:
     _API_KINDS = {
-        'eth': ('etherscan.io', 'ETH'),
-        'bsc': ('bscscan.com', 'BNB'),
+        'eth': ('etherscan.io/v2/api?chainid=1', 'ETH'),
+        'bsc': ('etherscan.io/v2/api?chainid=56', 'BNB'),
         'avax': ('snowtrace.io', 'AVAX'),
-        'polygon': ('polygonscan.com', 'MATIC'),
-        'optimism': ('etherscan.io', 'ETH'),
-        'base': ('basescan.org', 'ETH'),
-        'arbitrum': ('arbiscan.io', 'ETH'),
-        'fantom': ('ftmscan.com', 'FTM'),
-        'taiko': ('taikoscan.io', 'ETH'),
-        'snowscan': ('snowscan.xyz', 'AVAX'),
+        'polygon': ('etherscan.io/v2/api?chainid=137', 'MATIC'),
+        'optimism': ('etherscan.io/v2/api?chainid=10', 'ETH'),
+        'base': ('etherscan.io/v2/api?chainid=8453', 'ETH'),
+        'arbitrum': ('etherscan.io/v2/api?chainid=42161', 'ETH'),
+        'fantom': ('etherscan.io/v2/api?chainid=250', 'FTM'),
+        'taiko': ('etherscan.io/v2/api?chainid=167000', 'ETH'),
+        'snowscan': ('etherscan.io/v2/api?chainid=43114', 'AVAX'),
     }
 
     BASE_URL: str = None
@@ -66,7 +66,7 @@ class UrlBuilder:
         default_prefix = 'api' if self._is_main else f'api-{self._network}'
         prefix = prefix_exceptions.get((self.api_kind, self._is_main), default_prefix)
 
-        return self._build_url(prefix, 'api')
+        return self._build_url(prefix,'')
 
     def _get_base_url(self) -> str:
         network_exceptions = {('polygon', 'testnet'): 'mumbai'}
